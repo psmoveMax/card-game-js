@@ -110,6 +110,12 @@ body {
     max-height: 100%;
 }
 
+.card.back {
+    background-image: url("img/card_back.png");
+    background-size: cover;
+}
+
+
 /* настройки лицевой стороны */
 .card .front {
     /* переворачиваем карточку обложкой вверх */
