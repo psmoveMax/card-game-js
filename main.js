@@ -27,36 +27,43 @@
     card.classList.add("card", "back");
 
     card.addEventListener("click", function () {
-      card.classList.toggle("inside");
-      card.classList.toggle("back");
-      if (card.classList.contains("inside")) {
-        card.textContent = cardInfo;
-      } else {
-        card.textContent = "";
-      }
+      console.log(card.classList.contains('guessed'));
+      console.log((card.classList.contains('block_card')));
+      if (!card.classList.contains('guessed') && (!card.classList.contains('block_card'))) {
+        console.log('Отгадана');
+        card.classList.toggle("inside");
+        card.classList.toggle("back");
+        if (card.classList.contains("inside")) {
+          card.textContent = cardInfo;
+        } else {
+          card.textContent = "";
+        }
 
-      let inside_cards = document.querySelectorAll(".inside");
+        let inside_cards = document.querySelectorAll(".inside");
 
-      // Проверка на совпадение
-      if (inside_cards.length == 2) {
-        setTimeout(checkMatch, 1000);
-        function checkMatch() {
-          if (inside_cards[0].textContent == inside_cards[1].textContent) {
-            inside_cards[0].classList.remove("inside");
-            inside_cards[1].classList.remove("inside");
-            inside_cards[0].setAttribute("disabled", "disabled");
-            inside_cards[1].setAttribute("disabled", "disabled");
-          } else {
-            inside_cards[0].classList.remove("inside");
-            inside_cards[1].classList.remove("inside");
-            inside_cards[0].textContent = "";
-            inside_cards[1].textContent = "";
-            inside_cards[0].classList.toggle("back");
-            inside_cards[1].classList.toggle("back");
+        // Проверка на совпадение
+        if (inside_cards.length == 2) {
+          setTimeout(checkMatch, 1000);
+          function checkMatch() {
+            if (inside_cards[0].textContent == inside_cards[1].textContent) {
+              inside_cards[0].classList.add("guessed");
+              inside_cards[1].classList.add("guessed");
+              inside_cards[0].classList.remove("inside");
+              inside_cards[1].classList.remove("inside");
+            } else {
+              inside_cards[0].classList.remove("inside");
+              inside_cards[1].classList.remove("inside");
+              inside_cards[0].textContent = "";
+              inside_cards[1].textContent = "";
+              inside_cards[0].classList.toggle("back");
+              inside_cards[1].classList.toggle("back");
+            }
           }
         }
+        console.log(inside_cards);
       }
-      console.log(inside_cards);
+
+
     });
     return card;
   }
@@ -73,10 +80,42 @@
 
       console.log(container);
       let card;
+      let startGame = false;
+
+      // Формирование карт
       for (let i = 0; i < shuffleArray.length; i++) {
         card = createCard(shuffleArray, i);
         container.append(card);
       }
+
+      startGame = true;
+
+      console.log(document.querySelectorAll('back'));
+      console.log(shuffleArray[0]);
+      // Состояние начала игры
+
+      if (startGame == true) {
+        setTimeout(startGameStarted, 3000);
+        for (let i = 0; i < shuffleArray.length; i++) {
+          document.querySelectorAll('.card')[i].textContent = shuffleArray[i];
+          document.querySelectorAll('.card')[i].classList.remove('back');
+          document.querySelectorAll('.card')[i].classList.add('block_card');
+        }
+
+        function startGameStarted() {
+          for (let i = 0; i < shuffleArray.length; i++) {
+            document.querySelectorAll('.card')[i].textContent = '';
+            document.querySelectorAll('.card')[i].classList.add('back');
+            document.querySelectorAll('.card')[i].classList.remove('block_card');
+          }
+        }
+
+      }
+
+      startGame = false;
+
+
+
       console.log(card.textContent);
     } else {
       let shuffleArray = shuffle(createNumbersArray(4));
