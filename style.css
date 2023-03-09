@@ -66,3 +66,66 @@ body {
 }
 
 
+.modal {
+    display: none;
+    background: black;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 99999;
+}
+
+.modal_vis {
+    display: block;
+}
+
+.modal_content {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    overflow: auto;
+    flex-direction: column;
+}
+
+#modal_header_winner {
+    color: green
+}
+
+.btn {
+    width: 162px;
+    margin-bottom: 10px;
+}
+
+.body_block {
+    overflow: hidden;
+    margin-right: 17px;
+}
+
+#close_modal {
+    visibility: hidden;
+}
+
+#close_modal:hover {
+    color: #FFF;
+    transform: rotate(135deg);
+}
+
+.modal_txt {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2), 0 16px 20px rgba(0, 0, 0, 0.2);
+    background: #FFF;
+    padding: 30px;
+    margin: 100px auto;
+    max-width: 800px;
+}
+
+.open_modal {
+    visibility: hidden;
+}
