@@ -15,7 +15,6 @@
     <script>
         document.addEventListener('DOMContentLoaded', function () {
 
-            //startGame(2, document.getElementById('game'));
             let modal_winner = document.getElementById('modal_winner');
 
             let modal_start = document.getElementById('modal_start');
@@ -24,6 +23,7 @@
             let body = document.getElementsByTagName('body')[0];
             let button_restart = document.getElementById('restart');
             let button_back = document.getElementById('back');
+            let count_pair = Number(document.getElementById('count_pair').value);
 
             function gameDelete() {
                 let deleteElement = document.querySelectorAll('.card');
@@ -33,21 +33,32 @@
             }
 
             button_restart.addEventListener("click", function () {
+
                 gameDelete();
-                startGame(4, document.getElementById('game'));
+                startGame(count_pair, document.getElementById('game'));
                 modal_winner.classList.remove('modal_vis');
             });
 
             button_start.addEventListener("click", function () {
+                count_pair = Number(document.getElementById('count_pair').value);
+                if (count_pair % 2 == 0 && count_pair > 0 && count_pair < 11) {
+                    count_pair = Number(document.getElementById('count_pair').value);
+                } else {
+                    count_pair = 4;
+                }
+
                 gameDelete();
-                startGame(4, document.getElementById('game'));
+                startGame(count_pair, document.getElementById('game'));
                 modal_start.classList.remove('modal_vis');
+
+
             });
 
             button_back.addEventListener("click", function () {
                 modal_start.classList.add('modal_vis');
                 modal_winner.classList.remove('modal_vis');
             });
+
         });
     </script>
 </head>
@@ -59,7 +70,7 @@
         <!-- модальное окно, которое появится после сбора всех пар -->
 
         <div id="modal_winner" class="modal bounceIn">
-            <div class="modal_content">\
+            <div class="modal_content">
                 <h1 id="modal_header_winner">Победа!</h1>
                 <button type="button" class="btn btn-primary" id="restart">Сыграть еще раз?</button>
                 <button type="button" class="btn btn-info" id="back">Назад в меню</button>
@@ -69,17 +80,17 @@
         <div id="modal_start" class="modal bounceIn">
             <div class="modal_content">\
                 <h1 id="modal_header_winner">Игра в пары</h1>
-                <button type="button" class="btn btn-primary" id="start"">Начать игру</button>
+                <button type="button" class="btn btn-primary" id="start">Начать игру</button>
                 <hr>
 
-<!--                <div class=" input-group mb-3">
-                    <input type="text" class="form-control" id="count_pair" placeholder="Количество пар (максимум 10)"
-                        aria-label="count" aria-describedby="basic-addon1">
-            </div> -->
-            <!--<button type="button" class="btn btn-info">Количество пар (максимум 10)</button>-->
-            <!--<button type="button" class="btn btn-info">Игра на время</button>-->
+                <div class=" input-group mb-3" style="width: 162px;">
+                    <input type="number" class="form-control" id="count_pair" max="10" min="2" step="2"
+                        placeholder="Количество пар" aria-label="count" aria-describedby="basic-addon1">
+                </div>
+                <!--<button type="button" class="btn btn-info">Количество пар (максимум 10)</button>-->
+                <!--<button type="button" class="btn btn-info">Игра на время</button>-->
+            </div>
         </div>
-    </div>
 </body>
 
 </html>
