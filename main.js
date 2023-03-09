@@ -25,10 +25,13 @@
     let cardInfo = arrayCards[indexCard];
     let card = document.createElement("div");
     card.classList.add("card", "back");
-    let game = document.querySelector('.game');
+    let game = document.querySelector(".game");
     card.addEventListener("click", function () {
-
-      if (!card.classList.contains('guessed') && (!card.classList.contains('block_card')) && (!game.classList.contains('block_game'))) {
+      if (
+        !card.classList.contains("guessed") &&
+        !card.classList.contains("block_card") &&
+        !game.classList.contains("block_game")
+      ) {
         card.classList.toggle("inside");
         card.classList.toggle("back");
         if (card.classList.contains("inside")) {
@@ -37,14 +40,21 @@
           card.textContent = "";
         }
 
+        function divLightFirst(match_card) {
+          match_card.classList.add("div_win_first");
+        }
 
         let inside_cards = document.querySelectorAll(".inside");
         // Проверка на совпадение
         if (inside_cards.length == 2) {
-          setTimeout(checkMatch, 500);
+          setTimeout(checkMatch, 150);
+
           function checkMatch() {
-            game.classList.add('block_game');
+            game.classList.add("block_game");
             if (inside_cards[0].textContent == inside_cards[1].textContent) {
+              divLightFirst(inside_cards[0]);
+              divLightFirst(inside_cards[1]);
+
               inside_cards[0].classList.add("guessed");
               inside_cards[1].classList.add("guessed");
               inside_cards[0].classList.remove("inside");
@@ -59,20 +69,19 @@
             }
 
             // Состояние победы
-            if (document.querySelectorAll('.card').length == document.querySelectorAll('.guessed').length) {
-              console.log('Winner');
-              modal_winner.classList.add('modal_vis'); // добавляем видимость окна
-              modal_winner.classList.remove('bounceOutDown'); // удаляем эффект закрытия
+            if (
+              document.querySelectorAll(".card").length ==
+              document.querySelectorAll(".guessed").length
+            ) {
+              console.log("Winner");
+              modal_winner.classList.add("modal_vis"); // добавляем видимость окна
+              modal_winner.classList.remove("bounceOutDown"); // удаляем эффект закрытия
             }
-            game.classList.remove('block_game');
+            game.classList.remove("block_game");
           }
         }
         console.log(inside_cards);
-
       }
-
-
-
     });
     return card;
   }
@@ -81,7 +90,6 @@
   // У каждой карточки будет свой номер из массива произвольных чисел. Вы также можете создать для этого специальную функцию. count - количество пар.
 
   function startGame(count, container) {
-
     if (count % 2 == 0 && count > 0 && count < 11) {
       let shuffleArray = shuffle(createNumbersArray(count));
       let card;
@@ -95,42 +103,36 @@
 
       startGame = true;
 
-      console.log(document.querySelectorAll('back'));
+      console.log(document.querySelectorAll("back"));
       console.log(shuffleArray[0]);
 
       // Состояние начала игры
       if (startGame == true) {
         setTimeout(startGameStarted, 3000);
         for (let i = 0; i < shuffleArray.length; i++) {
-          document.querySelectorAll('.card')[i].textContent = shuffleArray[i];
-          document.querySelectorAll('.card')[i].classList.remove('back');
-          document.querySelectorAll('.card')[i].classList.add('block_card');
+          document.querySelectorAll(".card")[i].textContent = shuffleArray[i];
+          document.querySelectorAll(".card")[i].classList.remove("back");
+          document.querySelectorAll(".card")[i].classList.add("block_card");
         }
 
         function startGameStarted() {
           for (let i = 0; i < shuffleArray.length; i++) {
-            document.querySelectorAll('.card')[i].textContent = '';
-            document.querySelectorAll('.card')[i].classList.add('back');
-            document.querySelectorAll('.card')[i].classList.remove('block_card');
+            document.querySelectorAll(".card")[i].textContent = "";
+            document.querySelectorAll(".card")[i].classList.add("back");
+            document
+              .querySelectorAll(".card")
+              [i].classList.remove("block_card");
           }
         }
-
       }
 
       startGame = false;
 
       let endGame = false;
 
-
-
       console.log(card.textContent);
     }
   }
-
-
-
-
-
 
   window.startGame = startGame;
 })();

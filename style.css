@@ -50,12 +50,15 @@ body {
     /* выравнивание по центру */
     text-align: center;
     /* подключаем блочные элементы и перспективу */
-    display: block;
     perspective: 500px;
     /* добавляем относительное позиционирование */
     position: relative;
     cursor: pointer;
     z-index: 50;
+    margin: 10px;
+    font-size: 50px;
+    display: flex;
+    justify-content: center;
 }
 
 
@@ -128,4 +131,9 @@ body {
 
 .open_modal {
     visibility: hidden;
+}
+
+.div_win_first {
+    background-color: lightgreen;
+    transition: width 2s, height 2s, background-color 2s, transform 2s;
 }
