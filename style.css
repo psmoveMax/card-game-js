@@ -98,9 +98,7 @@ body {
     flex-direction: column;
 }
 
-#modal_header_winner {
-    color: green
-}
+
 
 .btn {
     width: 162px;
@@ -136,4 +134,73 @@ body {
 .div_win_first {
     background-color: lightgreen;
     transition: width 2s, height 2s, background-color 2s, transform 2s;
+}
+
+.lb1 {
+    margin: 1em;
+}
+
+#timer_check {
+    display: none;
+}
+
+#timer_check+.lb1,
+#timer_check+.lb1::before,
+#timer_check+.lb1::after {
+    transition: all .3s;
+}
+
+#timer_check+.lb1 {
+    display: inline-block;
+    position: relative;
+    width: 140px;
+    height: 60px;
+    border-radius: 30px;
+    cursor: pointer;
+}
+
+#timer_check+.lb1::before {
+    display: block;
+    content: attr(data-offlabel);
+    position: absolute;
+    top: 18px;
+    right: 10px;
+    color: black;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 19px;
+}
+
+#timer_check+.lb1::after {
+    border-radius: 50%;
+    content: '';
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 54px;
+    height: 54px;
+    background-color: white;
+}
+
+#timer_check:checked+.lb1::before {
+    content: attr(data-onlabel);
+    left: 16px;
+    right: auto;
+    color: #fff;
+}
+
+#timer_check:checked+.lb1::after {
+    left: 83px;
+    background-color: #f7f7f7;
+}
+
+#timer_check+.lb1 {
+    background-color: #ccc;
+}
+
+#timer_check:checked+.lb1 {
+    background-color: green;
+}
+
+#timer_check:checked+.lb1::before {
+    color: #fff;
 }
