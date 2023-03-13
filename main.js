@@ -73,9 +73,15 @@
               document.querySelectorAll(".card").length ==
               document.querySelectorAll(".guessed").length
             ) {
+
+
+              console.log('timer delete');
+
               if (document.querySelector('#timer') != null) {
+
                 document.querySelector('#timer').remove();
               }
+
 
               let deleteElement = document.querySelectorAll('.card');
               for (let i = 0; i < deleteElement.length; i++) {
@@ -115,20 +121,23 @@
           timer = setInterval(timer_work, 1000)
         seconds -= 1000;
         timer_div.innerHTML = seconds / 1000 + " секунд";
-        if (seconds <= 0) {
-          clearInterval(timer);
 
-          if (document.querySelector('#timer') != null) {
-            document.querySelector('#timer').remove();
-          }
+
+        if (seconds <= 0) {
+
+          clearInterval(timer);
 
           let deleteElement = document.querySelectorAll('.card');
           for (let i = 0; i < deleteElement.length; i++) {
             deleteElement[i].remove();
           }
-          console.log("Loss");
-          modal_loss.classList.add("modal_vis"); // добавляем видимость окна
-          modal_loss.classList.remove("bounceOutDown"); // удаляем эффект закрытия
+          if (document.querySelector('#timer') != null) {
+            document.querySelector('#timer').remove();
+            console.log("Loss");
+            modal_loss.classList.add("modal_vis"); // добавляем видимость окна
+            modal_loss.classList.remove("bounceOutDown"); // удаляем эффект закрытия
+          }
+
         }
 
       } //If seconds are equal or greater than 0, countdown until 1 minute has passed
