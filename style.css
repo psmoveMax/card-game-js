@@ -37,14 +37,34 @@ body {
     height: 100%;
 }
 
+#cards {
+    /* добавляем трёхмерность для эффекта вращения */
+    transform-style: preserve-3d;
+    perspective: 500px;
+    /* пусть элементы занимают всё доступное им пространство */
+    min-height: 100%;
+    height: 100%;
+
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+
+}
+
 
 
 /* стили карточек */
 .card {
     /* параметры расположения, высоты и ширины карточки */
     float: left;
-    width: 16.66666%;
-    height: 25%;
+    /*width: 16%;
+    height: 25%; */
+    margin: 1%;
+    width: 16%;
+    height: 22%;
     /* отступы */
     padding: 5px;
     /* выравнивание по центру */
@@ -55,8 +75,9 @@ body {
     position: relative;
     cursor: pointer;
     z-index: 50;
-    margin: 10px;
+    /*margin: 10px;*/
     font-size: 50px;
+
     display: flex;
     justify-content: center;
 }
@@ -66,6 +87,7 @@ body {
 .card.back {
     background-image: url("img/card_back.png");
     background-size: cover;
+    background-position: center;
 }
 
 

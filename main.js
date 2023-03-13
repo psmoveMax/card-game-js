@@ -179,7 +179,7 @@
         function startGameStarted() {
           if (timer == true) {
             timer_active = createTimer();
-            container.append(timer_active);
+            document.getElementById('game').append(timer_active);
           }
           for (let i = 0; i < shuffleArray.length; i++) {
             document.querySelectorAll(".card")[i].textContent = "";

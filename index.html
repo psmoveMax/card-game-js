@@ -29,39 +29,38 @@
 
             let count_pair = Number(document.getElementById('count_pair').value);
 
-
-
             function check_timer() {
                 let timer_check = document.querySelector('#timer_check').checked;
                 return timer_check;
             }
 
-
-
-
             button_start.addEventListener("click", function () {
                 timer_check = check_timer();
 
                 count_pair = Number(document.getElementById('count_pair').value);
+
+
+
+
                 if (count_pair % 2 == 0 && count_pair > 0 && count_pair < 11) {
                     count_pair = Number(document.getElementById('count_pair').value);
                 } else {
                     count_pair = 4;
                 }
 
-                startGame(count_pair, timer_check, document.getElementById('game'));
+                startGame(count_pair, timer_check, document.getElementById('cards'));
                 modal_start.classList.remove('modal_vis');
 
 
             });
 
             button_restart_win.addEventListener("click", function () {
-                startGame(count_pair, timer_check, document.getElementById('game'));
+                startGame(count_pair, timer_check, document.getElementById('cards'));
                 modal_winner.classList.remove('modal_vis');
             });
 
             button_restart_loss.addEventListener("click", function () {
-                startGame(count_pair, timer_check, document.getElementById('game'));
+                startGame(count_pair, timer_check, document.getElementById('cards'));
                 modal_loss.classList.remove('modal_vis');
             });
 
@@ -83,7 +82,9 @@
 <body>
     <div class="container wrap" id="container">
         <!-- блок с игрой -->
-        <div class="game" id="game"></div>
+        <div class="game" id="game">
+            <div id="cards"></div>
+        </div>
         <!-- модальное окно, которое появится после сбора всех пар -->
 
         <div id="modal_winner" class="modal bounceIn">
