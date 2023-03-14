@@ -35,6 +35,10 @@ body {
     /* пусть элементы занимают всё доступное им пространство */
     min-height: 100%;
     height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+
 }
 
 #cards {
@@ -42,8 +46,8 @@ body {
     transform-style: preserve-3d;
     perspective: 500px;
     /* пусть элементы занимают всё доступное им пространство */
-    min-height: 100%;
-    height: 100%;
+    min-height: 50%;
+    height: 99%;
 
     display: flex;
     flex-wrap: wrap;
@@ -52,6 +56,14 @@ body {
     justify-content: center;
     align-content: center;
 
+    border: 15px solid transparent;
+    border-image: linear-gradient(90deg, #00C9FF 0%, #92FE9D 100%) 20% / 1 / 0 stretch;
+
+}
+
+#timer {
+    font-size: large;
+    text-align: center;
 }
 
 
@@ -61,10 +73,12 @@ body {
     /* параметры расположения, высоты и ширины карточки */
     float: left;
     /*width: 16%;
-    height: 25%; */
-    margin: 1%;
-    width: 16%;
-    height: 22%;
+    height: 25%; 
+    margin: 7%;
+    width: 20%;
+    height: 34%;
+    */
+
     /* отступы */
     padding: 5px;
     /* выравнивание по центру */
@@ -79,14 +93,47 @@ body {
     font-size: 50px;
 
     display: flex;
+    flex-direction: column;
+    align-items: stretch;
     justify-content: center;
+}
+
+.card_2 {
+    margin: 2%;
+    width: 21%;
+    height: 39%;
+}
+
+.card_4 {
+    margin: 2%;
+    width: 20%;
+    height: 36%;
+}
+
+.card_6 {
+    margin: 2%;
+    width: 18%;
+    height: 29%;
+}
+
+.card_8 {
+    margin: 1%;
+    width: 13%;
+    height: 24%;
+}
+
+.card_10 {
+    margin: 2%;
+    width: 13%;
+    height: 21%;
 }
 
 
 
+
 .card.back {
-    background-image: url("img/card_back.png");
-    background-size: cover;
+    /* background-image: url("img/card_back.png"); */
+    /* background-size: cover; */
     background-position: center;
 }
 
@@ -154,12 +201,23 @@ body {
 }
 
 .div_win_first {
-    background-color: lightgreen;
+    background-color: lightgreen !important;
     transition: width 2s, height 2s, background-color 2s, transform 2s;
 }
 
 .lb1 {
     margin: 1em;
+}
+
+#timer {
+    border: 5px solid #004853;
+    display: inline;
+    padding: 5px;
+    color: #004853;
+    font-family: Verdana, sans-serif, Arial;
+    font-size: 40px;
+    font-weight: bold;
+    text-decoration: none;
 }
 
 #timer_check {
