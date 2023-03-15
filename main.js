@@ -84,13 +84,13 @@
 
 
 
-  function createCard(arrayCards, indexCard) {
+  function createCard(arrayCards, indexCard, bcg_current, pattern) {
     let cardInfo = arrayCards[indexCard];
     let card = document.createElement("div");
-    let bg_color = getRandomColor();
-    let pattern = patterns[Math.floor(Math.random() * patterns.length)];
+
+
     card.classList.add("card", "back", pattern);
-    card.style.backgroundColor = bg_color;
+
 
 
     let game = document.querySelector(".game");
@@ -100,18 +100,18 @@
         !card.classList.contains("block_card") &&
         !game.classList.contains("block_game")
       ) {
-        let bcg_current = card.getAttribute('bcg')
-        let sharpes_current = card.getAttribute('sharp');
+
+
         card.classList.toggle("inside");
         card.classList.toggle("back");
 
         if (card.classList.contains("inside")) {
           card.style.backgroundColor = 'white';
-          card.classList.remove(sharpes_current);
+          card.classList.remove(pattern);
           card.textContent = cardInfo;
         } else {
           card.style.backgroundColor = bcg_current;
-          card.classList.add(sharpes_current);
+          card.classList.add(pattern);
           card.textContent = "";
         }
 
@@ -161,7 +161,6 @@
             ) {
 
 
-              console.log('timer delete');
 
               if (document.querySelector('#timer') != null) {
 
@@ -173,14 +172,12 @@
               for (let i = 0; i < deleteElement.length; i++) {
                 deleteElement[i].remove();
               }
-              console.log("Winner");
               modal_winner.classList.add("modal_vis"); // добавляем видимость окна
               modal_winner.classList.remove("bounceOutDown"); // удаляем эффект закрытия
             }
             game.classList.remove("block_game");
           }
         }
-        console.log(inside_cards);
       }
     });
     return card;
@@ -202,11 +199,21 @@
       timer_div.addEventListener("keypress", timer_work());
 
       function timer_work() {
+        let game_status = 0;
         timer_div.removeEventListener("keypress", timer_work);
+
         if (seconds == 60000)
           timer = setInterval(timer_work, 1000)
         seconds -= 1000;
         timer_div.innerHTML = seconds / 1000 + " секунд";
+
+        if (document.querySelectorAll('.guessed').length == document.querySelectorAll('.back').length) {
+          game_status = 1;
+        }
+
+        if (seconds != 0 && game_status == 1) {
+          clearInterval(timer);
+        }
 
 
         if (seconds <= 0) {
@@ -219,13 +226,12 @@
           }
           if (document.querySelector('#timer') != null) {
             document.querySelector('#timer').remove();
-            console.log("Loss");
+
             modal_loss.classList.add("modal_vis"); // добавляем видимость окна
             modal_loss.classList.remove("bounceOutDown"); // удаляем эффект закрытия
           }
 
         }
-
       }
 
       timer_div.innerHTML = seconds / 1000 + " секунд";
@@ -233,19 +239,17 @@
     }
 
 
-
+    let bg_color = getRandomColor();
+    let sharp = patterns[Math.floor(Math.random() * patterns.length)];
     if (count % 2 == 0 && count > 0 && count < 11) {
       let shuffleArray = shuffle(createNumbersArray(count));
       let card;
       let startGame = false;
-      console.log(timer);
-      //Таймер
-
 
 
       // Формирование карт
       for (let i = 0; i < shuffleArray.length; i++) {
-        card = createCard(shuffleArray, i);
+        card = createCard(shuffleArray, i, bg_color, sharp);
         container.append(card);
 
         //Построение карт на доске
@@ -268,23 +272,21 @@
 
       startGame = true;
 
-      console.log(document.querySelectorAll("back"));
-      console.log(shuffleArray[0]);
 
       // Состояние начала игры
       if (startGame == true) {
         setTimeout(startGameStarted, 3000);
         for (let i = 0; i < shuffleArray.length; i++) {
           sharpes_current = document.querySelectorAll('.card')[i].classList[2];
-          bcg_current = document.querySelectorAll('.card')[i].style.backgroundColor;
-          console.log(sharpes_current);
+
+
           //Сохранение фона и узоров
-          document.querySelectorAll(".card")[i].setAttribute('sharp', sharpes_current);
-          document.querySelectorAll(".card")[i].setAttribute('bcg', bcg_current);
+          document.querySelectorAll(".card")[i].setAttribute('sharp', sharp);
+          document.querySelectorAll(".card")[i].setAttribute('bcg', bg_color);
 
           document.querySelectorAll(".card")[i].textContent = shuffleArray[i];
           document.querySelectorAll('.card')[i].style.backgroundColor = 'white';
-          document.querySelectorAll(".card")[i].classList.remove(sharpes_current);
+          document.querySelectorAll(".card")[i].classList.remove(sharp);
           document.querySelectorAll(".card")[i].classList.add("block_card");
         }
 
@@ -295,12 +297,10 @@
           }
           for (let i = 0; i < shuffleArray.length; i++) {
             sharpes_current = document.querySelectorAll('.card')[i].getAttribute('sharp');
-            bcg_current = document.querySelectorAll('.card')[i].getAttribute('bcg');
-            console.log(sharpes_current);
-            console.log(bcg_current);
+
             document.querySelectorAll(".card")[i].textContent = "";
-            document.querySelectorAll('.card')[i].style.backgroundColor = bcg_current;
-            document.querySelectorAll(".card")[i].classList.add(sharpes_current);
+            document.querySelectorAll('.card')[i].style.backgroundColor = bg_color;
+            document.querySelectorAll(".card")[i].classList.add(sharp);
             document.querySelectorAll(".card")[i].classList.remove("block_card");
 
           }
@@ -312,8 +312,6 @@
 
 
 
-
-      console.log(card.textContent);
     }
   }
 
