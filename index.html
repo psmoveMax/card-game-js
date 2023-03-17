@@ -35,13 +35,14 @@
                 return timer_check;
             }
 
+
+
+
+
             button_start.addEventListener("click", function () {
                 timer_check = check_timer();
 
                 count_pair = Number(document.getElementById('count_pair').value);
-
-
-
 
                 if (count_pair % 2 == 0 && count_pair > 0 && count_pair < 11) {
                     count_pair = Number(document.getElementById('count_pair').value);
@@ -107,7 +108,8 @@
         <div id="modal_start" class="modal bounceIn">
             <div class="modal_content">
                 <h1 style="color:white" class="neonText pulsate">Игра в пары</h1>
-                <button type="button" class="btn btn-primary" id="start">Начать игру</button>
+                <button type="button" class="btn btn-primary" id="start">Начать
+                    игру</button>
                 <hr>
                 <h3 style="color:white">Количество пар</h3>
                 <div class=" input-group mb-3" style="width: 162px;">

@@ -207,7 +207,7 @@
         seconds -= 1000;
         timer_div.innerHTML = seconds / 1000 + " секунд";
 
-        if (document.querySelectorAll('.guessed').length == document.querySelectorAll('.back').length) {
+        if (document.querySelectorAll('.card').length == 0) {
           game_status = 1;
         }
 
