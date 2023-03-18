@@ -28,7 +28,7 @@
             let button_back_win = document.getElementById('back_win');
             let button_back_loss = document.getElementById('back_loss');
 
-            let count_pair = Number(document.getElementById('count_pair').value);
+
 
             function check_timer() {
                 let timer_check = document.querySelector('#timer_check').checked;
@@ -40,16 +40,12 @@
 
 
             button_start.addEventListener("click", function () {
+                for(let i = 0; i < document.getElementsByClassName('count_pair').length; i++){
+                 if(document.getElementsByClassName('count_pair')[i].checked){
+                       count_pair = Number(document.getElementsByClassName('count_pair')[i].value);
+                  }
+                  }
                 timer_check = check_timer();
-
-                count_pair = Number(document.getElementById('count_pair').value);
-
-                if (count_pair % 2 == 0 && count_pair > 0 && count_pair < 11) {
-                    count_pair = Number(document.getElementById('count_pair').value);
-                } else {
-                    count_pair = 4;
-                }
-
                 startGame(count_pair, timer_check, document.getElementById('cards'));
                 modal_start.classList.remove('modal_vis');
 
@@ -112,10 +108,18 @@
                     игру</button>
                 <hr>
                 <h3 style="color:white">Количество пар</h3>
+                <div class="radio">
+                    <input label="2" type="radio" class="count_pair" name="count_pair" value="2">
+                    <input label="4" type="radio" class="count_pair" name="count_pair" value="4" checked>
+                    <input label="6" type="radio" class="count_pair" name="count_pair" value="6" >
+                    <input label="8" type="radio" class="count_pair" name="count_pair" value="8" >
+                    <input label="10" type="radio" class="count_pair" name="count_pair" value="10" >
+                </div>
+                <!--
                 <div class=" input-group mb-3" style="width: 162px;">
                     <input type="number" class="form-control" id="count_pair" max="10" min="2" step="2"
                         placeholder="Количество пар" aria-label="count" aria-describedby="basic-addon1" value="4">
-                </div>
+                </div> -->
                 <hr>
                 <h3 style="color:white">Таймер</h3>
                 <input type="checkbox" id="timer_check" name="timer_check">
